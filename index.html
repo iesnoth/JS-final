@@ -20,6 +20,9 @@
         charset="utf-8"></script>
     <!-- MY JS -->
     <style>
+        #places{
+            z-index: 2;
+        }
         #map {
             width: 100%;
             height: 2000px;
@@ -30,12 +33,12 @@
 
 <body>
     <form>
-        <select name="cars" id="cars">
-            <option value="none">Choose One</option>
-            <option value="coffee">Coffee Places</option>
-            <option value="restaurant">Restaurants</option>
-            <option value="hotels">Lodging</option>
-            <option value="groceries">Groceries</option>
+        <select name="places" id="places">
+            <option id="none">Choose One</option>
+            <option id="coffee">Coffee Places</option>
+            <option id="restaurant">Restaurants</option>
+            <option id="hotels">Lodging</option>
+            <option id="groceries">Groceries</option>
         </select>
     </form>
     <div id="map"></div>
@@ -43,3 +46,5 @@
 </body>
 
 </html>
+
+<!--Key fsq3uTzJAp7xsWq/IYnf2/ZKGrGA2SdHA1D3sKNgCg82Vt4= -->
