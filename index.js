@@ -27,32 +27,45 @@ async function getCoords() {
 document.getElementById("groceries").addEventListener("click", () => displayOption("groceries"));
 
 async function displayOption(id) {
+    // const options = {
+    //     method: 'GET',
+    //     headers: {
+    //         accept: 'application/json',
+    //         Authorization: 'fsq3uTzJAp7xsWq/IYnf2/ZKGrGA2SdHA1D3sKNgCg82Vt4='
+    //     }
+    // };
+
+    // try {
+    //     const coords = await getCoords();
+    //     console.log(coords)
+    //     await fetch(`https://api.foursquare.com/v3/places/search?query=${id}&ll=${coords[0]}%2C${coords[1]}&radius=3000&limit=1`, options)
+    //     .then(response => response.json())
+    //     .then(response => console.log(response.results[0].name))
+
+    // } catch (error) {
+    //     console.error(error);
+    // }
+
     const options = {
         method: 'GET',
         headers: {
-            accept: 'application/json',
-            Authorization: 'fsq3uTzJAp7xsWq/IYnf2/ZKGrGA2SdHA1D3sKNgCg82Vt4='
+          accept: 'application/json',
+          Authorization: 'fsq3uTzJAp7xsWq/IYnf2/ZKGrGA2SdHA1D3sKNgCg82Vt4='
         }
-    };
-
-    try {
-        const coords = await getCoords();
-        console.log(coords)
-        await fetch(`https://api.foursquare.com/v3/places/search?query=${id}&ll=${coords[0]}%2C${coords[1]}&radius=3000&limit=1`, options)
+      };
+      
+      fetch(`https://api.foursquare.com/v3/places/search?query=${id}&ll=${coords[0]}%2C${coords[1]}&radius=3000&limit=1`, options)
         .then(response => response.json())
-        .then(response => console.log(response.results[0].name))
-
-    } catch (error) {
-        console.error(error);
-    }
-
-
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
 
     // const marker = L.marker([48.87007, 2.346453]).addTo(map);
     // // marker.addTo(myMap).bindPopup('<p1><b>The Hoxton, Paris</b></p1>').openPopup()
     // marker.bindPopup("The Hoxton, Paris").openPopup();
 }
 
+
+//object for reference
 // {
 //     "results": [
 //       {
