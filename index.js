@@ -46,23 +46,29 @@ async function displayOption(id) {
     //     console.error(error);
     // }
 
-    const options = {
-        method: 'GET',
-        headers: {
-          accept: 'application/json',
-          Authorization: 'fsq3uTzJAp7xsWq/IYnf2/ZKGrGA2SdHA1D3sKNgCg82Vt4='
-        }
-      };
+    // const options = {
+    //     method: 'GET',
+    //     headers: {
+    //       accept: 'application/json',
+    //       Authorization: 'fsq3uTzJAp7xsWq/IYnf2/ZKGrGA2SdHA1D3sKNgCg82Vt4='
+    //     }
+    //   };
+
+      const coords = getCoords()
+      //let latitude = coords[0]
+      console.log(coords)
       
-      fetch(`https://api.foursquare.com/v3/places/search?query=${id}&ll=${coords[0]}%2C${coords[1]}&radius=3000&limit=1`, options)
-        .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
+    //   await fetch(`https://api.foursquare.com/v3/places/search?query=${id}&ll=${coords[0].substring(0,5)}%2C${coords[1].substring(0,5)}&radius=3000&limit=1`, options)
+    //     .then(response => response.json())
+    //     .then(response => console.log(response))
+    //     .catch(err => console.error(err));
 
     // const marker = L.marker([48.87007, 2.346453]).addTo(map);
     // // marker.addTo(myMap).bindPopup('<p1><b>The Hoxton, Paris</b></p1>').openPopup()
     // marker.bindPopup("The Hoxton, Paris").openPopup();
 }
+
+
 
 
 //object for reference
