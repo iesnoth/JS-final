@@ -6,8 +6,23 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '© OpenStreetMap'
 }).addTo(map);
+
 //find user's location
-L.control.locate().addTo(map);
+//L.control.locate().addTo(map);
+
+// another way to get user location
+async function getCoords(){
+	const myPosition = await new Promise((resolve, reject) => {
+		navigator.geolocation.getCurrentPosition(resolve, reject)
+	});
+	return [myPosition.coords.latitude, myPosition.coords.longitude]
+}
+//getCoords()
+
+
+
+
+
 
 // Allow the user to select a business type from a list and
 //map the five nearest locations on the map using the Foursquare API.
@@ -16,13 +31,16 @@ L.control.locate().addTo(map);
 Said onclick will have a function with a fetch request for the 5 closest of that thing
 The 5 closest places will need to have markers on the map 
  */
-//Using this method of getting coordinates to put the right coordinates into the fetch request.                                                             
-async function getCoords() {
-    let myPosition = await new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject);
-    })
-    return myPosition
-}
+//Using this method of getting coordinates to put the right coordinates into the fetch request.         
+
+
+
+// async function getCoords() {
+//     let myPosition = await new Promise((resolve, reject) => {
+//         navigator.geolocation.getCurrentPosition(resolve, reject);
+//     })
+//     return myPosition
+// }
 
 document.getElementById("groceries").addEventListener("click", () => displayOption("groceries"));
 
@@ -58,15 +76,15 @@ async function displayOption(id) {
       //let latitude = coords[0]
       console.log(coords)
       
-    //   await fetch(`https://api.foursquare.com/v3/places/search?query=${id}&ll=${coords[0].substring(0,5)}%2C${coords[1].substring(0,5)}&radius=3000&limit=1`, options)
-    //     .then(response => response.json())
-    //     .then(response => console.log(response))
-    //     .catch(err => console.error(err));
 
-    // const marker = L.marker([48.87007, 2.346453]).addTo(map);
-    // // marker.addTo(myMap).bindPopup('<p1><b>The Hoxton, Paris</b></p1>').openPopup()
-    // marker.bindPopup("The Hoxton, Paris").openPopup();
-}
+
+//     // const marker = L.marker([48.87007, 2.346453]).addTo(map);
+//     // // marker.addTo(myMap).bindPopup('<p1><b>The Hoxton, Paris</b></p1>').openPopup()
+//     // marker.bindPopup("The Hoxton, Paris").openPopup();
+// }
+
+
+
 
 
 
