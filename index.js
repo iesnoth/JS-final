@@ -7,7 +7,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
 }).addTo(map);
 
-//find user's location and set marker
+//find user's location and set marker THIS WORKS
 async function getCoords() {
     const myPosition = await new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject)
@@ -70,3 +70,64 @@ function businessData(data) {
 //click event
 document.getElementById("groceries").addEventListener("click", () => displayOption("groceries"));
 
+
+//OBJECT for reference
+// "fsq_id": "581bcf0ebda2d737772cb35d",
+//       "categories": [
+//         {
+//           "id": 13002,
+//           "name": "Bakery",
+//           "icon": {
+//             "prefix": "https://ss3.4sqi.net/img/categories_v2/food/bakery_",
+//             "suffix": ".png"
+//           }
+//         },
+//         {
+//           "id": 13035,
+//           "name": "Coffee Shop",
+//           "icon": {
+//             "prefix": "https://ss3.4sqi.net/img/categories_v2/food/coffeeshop_",
+//             "suffix": ".png"
+//           }
+//         },
+//         {
+//           "id": 13046,
+//           "name": "Ice Cream Parlor",
+//           "icon": {
+//             "prefix": "https://ss3.4sqi.net/img/categories_v2/food/icecream_",
+//             "suffix": ".png"
+//           }
+//         }
+//       ],
+//       "chains": [],
+//       "distance": 717,
+//       "geocodes": {
+//         "main": {
+//           "latitude": 37.684456,
+//           "longitude": -97.345578
+//         },
+//         "roof": {
+//           "latitude": 37.684456,
+//           "longitude": -97.345578
+//         }
+//       },
+//       "link": "/v3/places/581bcf0ebda2d737772cb35d",
+//       "location": {
+//         "address": "535 W Douglas Ave",
+//         "address_extended": "Ste 140",
+//         "census_block": "201730043021022",
+//         "country": "US",
+//         "cross_street": "btwn McLean Blvd & N Sycamore St",
+//         "dma": "Wichita-Hutchinson Plus",
+//         "formatted_address": "535 W Douglas Ave (btwn McLean Blvd & N Sycamore St), Wichita, KS 67213",
+//         "locality": "Wichita",
+//         "neighborhood": [
+//           "Downtown"
+//         ],
+//         "postcode": "67213",
+//         "region": "KS"
+//       },
+//       "name": "Milkfloat",
+//       "related_places": {},
+//       "timezone": "America/Chicago"
+//     },

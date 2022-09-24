@@ -90,7 +90,7 @@ async function getFoursquare(business) {
 function processBusinesses(data) {
 	//editing the businesses variable?
 	//this sets up the objects which will be in the businesses array at the top of myMap
-	//"element" is a filler
+	//"element" is a filler argument?
 	let businesses = data.map((element) => {
 		let location = {
 			name: element.name,
@@ -104,18 +104,32 @@ function processBusinesses(data) {
 
 
 // event handlers
-// window load
+// window load, which only launches after everything else on the page has loaded
 window.onload = async () => {
+	//here we call the coordinates function
 	const coords = await getCoords()
+	//set the coordinates in the myMap object
 	myMap.coordinates = coords
+	//and launch the look of the map through the buildMap function
 	myMap.buildMap()
+	//at this point, all of the variables at the top have been filled in,
+	//EXCEPT for businesses
 }
 
 // business submit button
+//there's a submit button next to the dropdown menu which triggers the following events
 document.getElementById('submit').addEventListener('click', async (event) => {
+	//preventDefault keeps the browser from forcing a load, allowing it to wait until
+	//the user makes a choice
 	event.preventDefault()
+	//the business variable accesses the 'business' id in the html and takes the appropriate
+	//"value" from the form options within the select id
 	let business = document.getElementById('business').value
+	//calls the fucntion which gets the info from the 4square api and assigns it a variable
 	let data = await getFoursquare(business)
+	//fills the myMap businesses array with the solution of the processBusinesses function, which uses the
+	//data variable defined above as an argument
 	myMap.businesses = processBusinesses(data)
+	//finally, now that the businesses array has been populated, addMarkers() can be called
 	myMap.addMarkers()
 })
