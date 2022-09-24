@@ -7,7 +7,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
 }).addTo(map);
 
-//find user's location and set marker THIS WORKS
+//find user's location and set marker
 async function getCoords() {
     const myPosition = await new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject)
@@ -41,77 +41,32 @@ async function displayOption(id) {
         }
     };
 
-    try {
         const coords = await getCoords();
-        console.log(coords)
-        await fetch(`https://api.foursquare.com/v3/places/search?query=${id}&ll=${coords[0]}%2C${coords[1]}&radius=5000&limit=3`, options)
-            .then(response => response.json())
-           // .then(return response)
-
-
-    } catch {
-        console.log("There's been an error.")
-    };
+        let response = await fetch(`https://api.foursquare.com/v3/places/search?query=${id}&ll=${coords[0]}%2C${coords[1]}&radius=5000&limit=5`, options)
+        //parses the fetch results to text
+        let data = await response.text()
+        //makes the data into readable objects
+        let parsedData = JSON.parse(data)
+        //specifies the "results" of parsedData
+        let nearPlaces = parsedData.results
+        return nearPlaces
 
 }
 
-//OBJECT for reference
-// "fsq_id": "581bcf0ebda2d737772cb35d",
-//       "categories": [
-//         {
-//           "id": 13002,
-//           "name": "Bakery",
-//           "icon": {
-//             "prefix": "https://ss3.4sqi.net/img/categories_v2/food/bakery_",
-//             "suffix": ".png"
-//           }
-//         },
-//         {
-//           "id": 13035,
-//           "name": "Coffee Shop",
-//           "icon": {
-//             "prefix": "https://ss3.4sqi.net/img/categories_v2/food/coffeeshop_",
-//             "suffix": ".png"
-//           }
-//         },
-//         {
-//           "id": 13046,
-//           "name": "Ice Cream Parlor",
-//           "icon": {
-//             "prefix": "https://ss3.4sqi.net/img/categories_v2/food/icecream_",
-//             "suffix": ".png"
-//           }
-//         }
-//       ],
-//       "chains": [],
-//       "distance": 717,
-//       "geocodes": {
-//         "main": {
-//           "latitude": 37.684456,
-//           "longitude": -97.345578
-//         },
-//         "roof": {
-//           "latitude": 37.684456,
-//           "longitude": -97.345578
-//         }
-//       },
-//       "link": "/v3/places/581bcf0ebda2d737772cb35d",
-//       "location": {
-//         "address": "535 W Douglas Ave",
-//         "address_extended": "Ste 140",
-//         "census_block": "201730043021022",
-//         "country": "US",
-//         "cross_street": "btwn McLean Blvd & N Sycamore St",
-//         "dma": "Wichita-Hutchinson Plus",
-//         "formatted_address": "535 W Douglas Ave (btwn McLean Blvd & N Sycamore St), Wichita, KS 67213",
-//         "locality": "Wichita",
-//         "neighborhood": [
-//           "Downtown"
-//         ],
-//         "postcode": "67213",
-//         "region": "KS"
-//       },
-//       "name": "Milkfloat",
-//       "related_places": {},
-//       "timezone": "America/Chicago"
-//     },
+//get info out of foursquare data
+function businessData(data) {
+    //sifting through the nearPlaces object to get only the name, lat, and long and make its own object
+	let businesses = data.map((place) => {
+		let location = {
+			name: place.name,
+			lat: place.geocodes.main.latitude,
+			long: place.geocodes.main.longitude
+		};
+		return location
+	})
+	return businesses
+}
+
+//click event
+document.getElementById("groceries").addEventListener("click", () => displayOption("groceries"));
+
