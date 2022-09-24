@@ -17,6 +17,7 @@ async function getCoords(){
 	});
 	return [myPosition.coords.latitude, myPosition.coords.longitude]
 }
+
 //getCoords()
 
 
@@ -170,3 +171,4 @@ async function displayOption(id) {
 // How will you add that information to the map?
 // Add a simple select interface for the user with the following
 // values: coffee, restaurant, hotel, and market.}
+}
